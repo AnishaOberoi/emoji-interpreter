@@ -6,29 +6,36 @@ var foods = {
 	"🧁": "Cupcake",
 	"🌭": "Hotdog",
 	"🍝": "Pasta",
-	"🍣": "Sushi",
-	"🍩": "Donut"
+	"🍣": "Sushi"
 };
 var animals = {
 	"🐬": "Dolphin",
 	"🦒": "Giraffe",
-	"🦄": "Unicorn",
+	"🦢": "Swan",
 	"🦉": "Owl",
-	"🐙": "Octopus",
-	"🦢": "Swan"
+	"🐙": "Octopus"
 };
 
 var posts = {
 	"🕵️": "Detective",
-	"🧑‍⚕️‍": "Doctor",
+	"🧚‍": "Fairy",
 	"👩‍🍳": "Chef",
 	"🧑‍💻": "Programmer",
-	"🦸": "Superman",
-	"🧚": "Fairy"
+	"🦸": "Superman"
 };
+
+var gifts = {
+	"🎁": "Gift",
+	"👗": "Dress",
+	"🏀": "Basketball",
+	"🎄": "Christmas Tree",
+	"🧸": "Teddy Bear"
+};
+
 var foodKeys = Object.keys(foods);
 var animalsKeys = Object.keys(animals);
 var postKeys = Object.keys(posts);
+var giftKeys = Object.keys(gifts);
 export default function App() {
 	const [userInputMeaning, emojiMeaning] = useState("");
 
@@ -36,27 +43,38 @@ export default function App() {
 		var Input1 = e.target.value;
 		var Input2 = e.target.value;
 		var Input3 = e.target.value;
+		var Input4 = e.target.value;
 		var meaning1 = animals[Input1];
 		var meaning2 = foods[Input2];
 		var meaning3 = posts[Input3];
+		var meaning4 = gifts[Input4];
 
-		if (meaning1 === undefined && meaning2 === undefined && meaning3 === undefined) {
+		if (meaning1 === undefined && meaning2 === undefined && meaning3 === undefined && meaning4 === undefined) {
 			meaning1 = "Not Found in Database";
 			meaning2 = "Not Found in Database";
 			meaning3 = "Not Found in Database";
+			meaning4 = "Not Found in Database";
 			emojiMeaning(meaning1);
-		}else if(meaning1 === undefined && meaning2 === undefined){
+		}else if(meaning1 === undefined && meaning2 === undefined && meaning3 === undefined){
 			meaning1 = "Not Found in Database";
 			meaning2 = "Not Found in Database";
+			meaning3 = "Not Found in Database";
+			emojiMeaning(meaning4);
+		}else if(meaning2 === undefined && meaning3 === undefined && meaning4 === undefined){
+			meaning3 = "Not Found in Database";
+			meaning2 = "Not Found in Database";
+			meaning4 = "Not Found in Database";
+			emojiMeaning(meaning1);
+		}else if(meaning1 === undefined && meaning3 === undefined && meaning4 === undefined){
+			meaning1 = "Not Found in Database";
+			meaning3 = "Not Found in Database";
+			meaning4 = "Not Found in Database";
+			emojiMeaning(meaning2);
+		}else if(meaning1 === undefined && meaning2 === undefined && meaning4 === undefined){
+			meaning1 = "Not Found in Database";
+			meaning2 = "Not Found in Database";
+			meaning4 = "Not Found in Database";
 			emojiMeaning(meaning3);
-		}else if(meaning2 === undefined && meaning3 === undefined){
-			meaning3 = "Not Found in Database";
-			meaning2 = "Not Found in Database";
-			emojiMeaning(meaning1);
-		}else if(meaning1 === undefined && meaning3 === undefined){
-			meaning1 = "Not Found in Database";
-			meaning3 = "Not Found in Database";
-			emojiMeaning(meaning2);			
 		}
 
 	}
@@ -73,6 +91,11 @@ export default function App() {
 	function emojiClickHandlerPost(emoji) {
 		var meaning3 = posts[emoji];
 		emojiMeaning(meaning3);
+	}
+
+	function emojiClickHandlerGift(emoji) {
+		var meaning4 = gifts[emoji];
+		emojiMeaning(meaning4);
 	}
 
 
@@ -107,6 +130,13 @@ export default function App() {
 			{postKeys.map(function (keys) {
 				return (
 					<span> <li onClick={() => emojiClickHandlerPost(keys)}>{keys}  </li></span>
+				);
+			})}
+			</div>
+			<div class= "inner-div">
+			{giftKeys.map(function (keys) {
+				return (
+					<span> <li onClick={() => emojiClickHandlerGift(keys)}>{keys}  </li></span>
 				);
 			})}
 			</div>
